@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="Application"></div>
+    <!-- <script>
+        const App = Vue.createApp({
+            setup() {
+                // let a = 1;
+                // let b = 2;
+                // let sum = a + b;
+                let a = Vue.ref(1);
+                let b = Vue.ref(2);
+                let sum = Vue.computed(() => {
+                    return a.value + b.value
+                });
+                // function click() {
+                //     a += 1;
+                //     b += 2;
+                //     console.log(a);
+                //     console.log(b);
+                // }
+                function click() {
+                    a.value += 1;
+                    b.value += 2;
+                }
+                return {
+                    sum,
+                    click
+                }
+            },
+            template:`
+                <h1>测试数据:{{sum}}</h1>
+                <button @click="click">点击</button>
+            `
+        })
+        App.mount("#Application")
+    </script> -->
+    <!-- <script>
+        const App = Vue.createApp({
+            setup() {
+                let a = Vue.ref(1);
+                let b = Vue.ref(2);
+                let sum = Vue.computed({
+                    set(value){
+                        a.value = value
+                        b.value = value
+                    },
+                    get() {
+                        return a.value + b.value
+                    }
+                });
+                function click() {
+                    a.value += 1;
+                    b.value += 2;
+                    if(sum.value > 10) {
+                        sum.value = 0
+                    }
+                }
+                return{
+                    sum,
+                    click
+                }
+            }
+        })
+    </script> -->
+    <!-- <script>
+        const App = Vue.createApp({
+            setup() {
+                let a = Vue.ref(1);
+                Vue.watchEffect(() => {
+                    // 当变量a变化时，即执行当前函数
+                    console.log("变量a变化了");  
+                    console.log(a.value);
+                })
+                a.value = 2;
+                return {
+                    a
+                }
+            }
+        })
+    </script> -->
+    <script>
+        const App = Vue.createApp({
+            setup() {
+                let a = Vue.ref(1);
+                //暂存watchEffect的操作句柄
+                let stop = Vue.watchEffect(() => {
+                    //当变量a变化时， 即可执行当前函数
+                    console.log("变量a变化了");
+                    console.log(a.value);
+                })
+                a.value = 3;
+                return {
+                    a
+                }
+            }
+        })
+    </script>
+</body>
+</html>

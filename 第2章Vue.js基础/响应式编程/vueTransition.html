@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        @keyframes keyframe-in {
+            from {
+                width: 0px;
+                height: 0px;
+                background-color: red;
+            }
+            to {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+            }
+        }
+        @keyframes keyframe-out {
+            from {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+            }
+            to {
+                width: 0;
+                height: 0;
+                background-color: blue;
+            }
+        }
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .ani-enter-from {
+            width: 0px;
+            height: 0px;
+            background-color: red;
+        }
+        .ani-enter-active {
+            transition: width 2s, height 2s, background-color 2s;
+        }
+        .ani-enter-to {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .ani-enter-from {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .ani-enter-active {
+            transition: width 2s, height 2s, background-color 3s;
+        }
+        .ani-leave-to {
+            width: 0px;
+            height: 0px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="Application">
+        <button @click="click">显示/隐藏</button>
+        <transition name="ani" 
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @enter-cancelled="enterCancelled"
+        @leave="leave"
+        @after-leave="afterLeave"
+        @leave-cancelled="leaveCancelled"
+        :css="false"
+        >
+            <div v-if="show" class="demo"></div>
+        </transition>
+    </div>
+    <script>
+        const App = Vue.createApp({
+            data() {
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                click() {
+                    this.show = !this.show
+                },
+                //组件插入过渡开始前
+                beforeEnter(el){
+                    console.log("beforeEnter");
+                },
+                //组件插入过渡开始
+                enter(el, done) {
+                    console.log("enter");
+                },
+                afterEnter(el) {
+                    console.log("afterEnter");
+                },
+                //组件插入过渡取消
+                enterCancelled(el) {
+                    console.log("enterCancelled");
+                },
+                //组件移除过渡开始前
+                beforeLeave(el) {
+                    console.log("beforeLeave");
+                },
+                //组件移除过渡开始
+                leave(el, done) {
+                    console.log("leave");
+                },
+                //组件移除过渡后
+                afterLeave(el) {
+                    console.log("afterLeave");
+                },
+                // 组件移除过渡取消
+                leaveCancelled(el) {
+                    console.log("leaveCancelled");
+                }
+
+            },
+        })
+        App.mount("#Application")
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixin</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="Application">
+        <my-com1 title="组件1"></my-com1>
+        <my-com2 title="组件2"></my-com2>
+        <my-com3 title="组件3"></my-com3>
+    </div>
+    <script>
+        const App = Vue.createApp({})
+        const com1 = {
+            props: ['title'],
+            template: `
+                <div style="border:red solid 2px;">{{title}}</div>
+            `
+        }
+    </script>
+</body>
+</html>

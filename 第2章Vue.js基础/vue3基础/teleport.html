@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teleport</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="outer">
+            <h3>Tooltips with Vue 3 Teleport</h3>
+            <div>
+              <MyModal/>
+            </div>
+          </div>
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+        const App = Vue.createApp({})
+        const MyModal = {
+            template:`
+                <div>
+                    <button @click="open = true">Open Modal</button>
+                    <div v-if="open" class="modal">
+                        <p>Hello from the modal!</p>
+                        <button @click="open = false">Close</button>
+                    </div>
+                </div>
+            `
+        }
+
+
+
+        App.component('MyModal', MyModal)
+        App.mount('#app')
+    </script>
+</body>
+</html>

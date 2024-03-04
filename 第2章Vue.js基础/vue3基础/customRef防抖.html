@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <!-- 防抖是在频繁事件触发设定时间内只触发一次，如果再时间内再触发需重新计算 -->
+    <div id="app">
+            <input v-model="text" />
+            <p class="result">{{text}}</p>
+    </div>
+    <script>
+        const { createApp, ref, customRef } = Vue
+      
+        createApp({
+          setup() {
+            const text = debounceRef('')
+            function debounceRef(value, delay = 1000) {
+                let timer;
+                return customRef((track, trigger) => {
+                    return{
+                        get(){
+                            track();
+                            return value;
+                        },
+                        set(val){
+                            clearTimeout(timer);
+                            timer = setTimeout(() => {
+                                value = val;
+                                trigger();
+                            }, delay);
+                        }
+                    }
+                })
+            }
+            return {
+                text
+            }
+          }
+        }).mount('#app')
+    </script>
+</body>
+</html>

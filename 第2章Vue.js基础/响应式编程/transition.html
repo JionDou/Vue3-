@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        /* .demo {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition-property: width, height, background-color;
+            transition-duration: 1s;
+            transition-timing-function: linear;
+            transition-delay: 2s;
+        }
+        .demo-ani {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            transition: width 2s, height 2s, background-color 2s;
+        } */
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .demo2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .ani-enter-from {
+            width: 0px;
+            height: 0px;
+            background-color: red;
+        }
+        .ani-enter-active{
+            transition: width 3s, height 3s, background-color 3s;
+        }
+        .ani-enter-to {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="Application">
+        <!-- <div :class="cls" @click="run"></div> -->
+        <button @click="click">显示/隐藏</button>
+        <transition name="ani">
+            <div v-if="show" class="demo"></div>
+            <div v-else class="demo2"></div>
+        </transition>
+    </div>
+    <script>
+        const App = Vue.createApp({
+            data() {
+                return {
+                    // cls:"demo"
+                    show: false
+                }
+            },
+            methods: {
+                // run() {
+                //     if(this.cls == "demo") {
+                //         this.cls = "demo-ani"
+                //     } else {
+                //         this.cls = "demo"
+                //     }
+                // }
+                click(){
+                    this.show = !this.show
+                }
+            },
+        })
+        App.mount("#Application")
+    </script>
+</body>
+</html>

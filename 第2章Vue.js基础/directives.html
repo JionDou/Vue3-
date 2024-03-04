@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.global.js"></script>
+    <style>
+        #h1{
+            color: red;
+        }
+        .h1{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="Application">
+        <h1 v-bind:[prop]="name" v-if="show">标题</h1>
+        <ol>
+            <li v-for="(value, key, index) in person">{{key}}: {{value}}</li>
+        </ol>
+        <!-- <ul>
+            <li v-for="(item,index) in handle(list)">
+                <div>{{index + "." + item.name}}</div>
+                <div>{{item.num}}</div>
+            </li>
+        </ul> -->
+        <template v-for="(item, index) in handle(list)">
+            <div>{{ index + "." + item.name}}</div>
+            <div>{{item.num}}</div>
+        </template>
+    </div>
+    
+    <script>
+        const App = {
+            data() {
+                return {
+                    show: false,
+                    prop:"class",
+                    name:"h1",
+                    person:{
+                        name: "辉少",
+                        age:"00",
+                        num:"151xxxxxxx",
+                        email:"xxxx@xx.com"
+                    }
+                }
+            },
+            methods: {
+                handle(l) {
+                    return l.filter(obj => obj.name != "辉少")
+                }
+            },
+        }
+        Vue.createApp(App).mount('#Application')
+    </script>
+</body>
+</html>
